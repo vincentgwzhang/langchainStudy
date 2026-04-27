@@ -30,9 +30,29 @@ embeddings = OpenAIEmbeddings(model="text-embedding-3-small")
 # 定义Chroma
 db = Chroma(persist_directory=chroma_dbpath, embedding_function=embeddings)
 
-# 定义retriever
-# - https://python.langchain.com/v0.2/docs/integrations/vectorstores/chroma/
-# retriever_docs = db.similarity_search_with_score(client_prompt)
+
+# MMR (Maximal Marginal Relevance)：解决“复读机”问题
+'''
+我不要 5 条长得几乎一模一样的结果，我要 5 条既相关又互补的结果。”
+fetch_k=50：检索器先一口气从库里抓出 50 条最相关的候选。
+k=5：然后在这 50 条里进行“内部竞争”，挑选出 5 条语义覆盖面最广的结果。
+
+retriever = db.as_retriever(
+    search_type="mmr",
+    search_kwargs={'k': 5, 'fetch_k': 50}
+)
+'''
+
+'''
+Similarity Score Threshold：解决“强行凑数”问题
+score_threshold=0.8：这就像是一个及格线
+
+retriever = db.as_retriever(
+    search_type="similarity_score_threshold",
+    search_kwargs={'score_threshold': 0.8}
+)
+'''
+
 retriever = db.as_retriever(
     search_type="similarity",
     search_kwargs={"k": 1},
