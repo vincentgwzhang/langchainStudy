@@ -1,5 +1,4 @@
 __pycache__/
 _pvenv_/
 
-db/sanguo.db/
-db/sanguo_meta.db/
+db/

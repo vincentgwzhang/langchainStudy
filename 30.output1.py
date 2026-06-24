@@ -5,6 +5,10 @@ from langchain_openai import ChatOpenAI
 from typing import Optional
 from pydantic import BaseModel, Field
 
+#####################################
+# 这个其实就是 Schema Constraint
+#####################################
+
 print("=" * 100)
 start_time = time.time()
 load_dotenv()

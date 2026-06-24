@@ -4,6 +4,10 @@ from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
 
+#####################################
+# 这个其实就是 Prompt Constraint
+#####################################
+
 print("=" * 100)
 start_time = time.time()  # 获取开始时间
 load_dotenv()
